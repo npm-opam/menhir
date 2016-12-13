@@ -1,0 +1,58 @@
+{
+    "name": "menhir-actual",
+    "exportedEnvVars": {
+        "menhir_installed": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "true"
+        },
+        "CAML_LD_LIBRARY_PATH": {
+            "global": true,
+            "resolveAsRelativePath": true,
+            "globalCollisionBehavior": "joinPath",
+            "val": "./_build/ocamlfind/lib/stublibs"
+        },
+        "menhir_version": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "20160825.0.0"
+        },
+        "FINDLIB": {
+            "global": true,
+            "resolveAsRelativePath": true,
+            "globalCollisionBehavior": "joinPath",
+            "val": "./_build/ocamlfind/lib"
+        },
+        "version": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "20160825.0.0"
+        },
+        "menhir_enable": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "enable"
+        },
+        "PATH": {
+            "global": true,
+            "resolveAsRelativePath": true,
+            "globalCollisionBehavior": "joinPath",
+            "val": "./_build/ocamlfind/bin"
+        }
+    },
+    "version": "20160825.0.0",
+    "dependencies": {
+        "@opam-alpha/ocamlfind": "*",
+        "dependency-env": "*",
+        "substs": "https://github.com/yunxing/substs.git",
+        "@opam-alpha/ocamlbuild": "*",
+        "nopam": "*",
+        "opam-installer-bin": "https://github.com/yunxing/opam-installer-bin.git"
+    },
+    "scripts": {
+        "postinstall": "eval $(dependencyEnv) && nopam && make -f Makefile PREFIX=$opam_prefix USE_OCAMLFIND=true docdir=$opam_doc/menhir libdir=$opam_lib/menhir mandir=$opam_man/man1 && make -f Makefile install PREFIX=$opam_prefix docdir=$opam_doc/menhir libdir=$opam_lib/menhir mandir=$opam_man/man1 && (opam-installer --prefix=$opam_prefix || true)"
+    },
+    "peerDependencies": {
+        "@opam-alpha/ocaml": ">= 4.02.0"
+    }
+}
